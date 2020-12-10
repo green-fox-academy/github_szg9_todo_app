@@ -7,9 +7,11 @@ import { Todo } from "./todo.js"
 
 const toDo = new Todo('thingstodo.txt');
 
-toDo.getList();
-
-if (args.l === true) {
+if (checkArguments()) {
+    console.log("");
+    console.log('Nem támogatott argumentum!');
+    toDo.printInstructions();
+} else if (args.l === true) {
     toDo.printTodoList();
 } else if (args.hasOwnProperty('a')) {
     toDo.addTask(args.a);
@@ -17,4 +19,13 @@ if (args.l === true) {
     toDo.removeTask(args.r);
 } else {
     toDo.printInstructions();
+};
+
+function checkArguments() {
+    const argsArray = Object.keys(args);
+    if (argsArray.includes('l') || argsArray.includes('a') || argsArray.includes('c') || argsArray.includes('r')) {
+        return false;
+    } else {
+        return true;
+    }
 };
