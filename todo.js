@@ -33,7 +33,6 @@ export class Todo {
             } else {
                 this.getList();
                 this.toDoList.push(task);
-                console.log(this.toDoList);
                 this.updateList();
             }
         } catch (err) {
