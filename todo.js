@@ -34,6 +34,7 @@ export class Todo {
                 this.getList();
                 this.toDoList.push(task);
                 this.updateList();
+                console.log(`${task} feladat elmentve.`);
             }
         } catch (err) {
             console.log(err.message);
@@ -46,6 +47,7 @@ export class Todo {
             this.getList();
             this.toDoList.splice(taskNumber - 1, 1);
             this.updateList();
+            console.log(`${task}. számú feladat törölve.`);
         } catch (err) {
             console.log(err.message);
         }
