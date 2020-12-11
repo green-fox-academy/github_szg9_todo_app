@@ -57,7 +57,7 @@ class TodoList {
         try {
             this.getList();
             if (taskNumber === true || taskNumber === '') throw Error('Nem lehetséges az eltávolítás: nem adott meg indexet!');
-            if (taskNumber > this.textList.length) throw Error('Nem lehetséges az eltávolítás: túlindexelési probléma adódott!');
+            if (taskNumber > this.textList.length || taskNumber == 0) throw Error('Nem lehetséges az eltávolítás: túlindexelési probléma adódott!');
             if (typeof taskNumber != "number") throw Error('Nem lehetséges az eltávolítás: a megadott index nem szám!');
             this.textList.splice(taskNumber - 1, 1);
             this.updateList();
@@ -92,9 +92,9 @@ class TodoList {
     getTaskCompleted(taskNumber) {
         try {
             this.getList();
-            if (taskNumber === true || taskNumber === '') throw Error('Nem lehetséges az eltávolítás: nem adott meg indexet!');
-            if (taskNumber > this.textList.length) throw Error('Nem lehetséges az eltávolítás: túlindexelési probléma adódott!');
-            if (typeof taskNumber != "number") throw Error('Nem lehetséges az eltávolítás: a megadott index nem szám!');
+            if (taskNumber === true || taskNumber === '') throw Error('Nem lehetséges a késznek jelölés: nem adott meg indexet!');
+            if (taskNumber > this.textList.length || taskNumber == 0) throw Error('Nem lehetséges a késznek jelölés: túlindexelési probléma adódott!');
+            if (typeof taskNumber != "number") throw Error('Nem lehetséges a késznek jelölés: a megadott index nem szám!');
             this.createTaskList();
             this.taskList[taskNumber - 1].getCompleted();
             this.textList[taskNumber - 1] = this.textList[taskNumber - 1] + ' x ';
