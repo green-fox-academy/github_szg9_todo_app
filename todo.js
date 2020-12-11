@@ -8,7 +8,7 @@ export class Todo {
 
     getList() {
         try {
-            if (!fs.existsSync(this.file)) throw Error(`Unable to write file: ${this.file}`);
+            if (!fs.existsSync(this.file)) throw Error(`Unable to read file: ${this.file}`);
             this.toDoList = (fs.readFileSync(this.file).toString().split('\n'));
         } catch (err) {
             console.log(err.message);
@@ -42,28 +42,18 @@ export class Todo {
     }
 
     removeTask(taskNumber) {
-        try {
-            if (!fs.existsSync(this.file)) throw Error(`Unable to write file: ${this.file}`);
-            this.getList();
-            this.toDoList.splice(taskNumber - 1, 1);
-            this.updateList();
-            console.log(`${task}. számú feladat törölve.`);
-        } catch (err) {
-            console.log(err.message);
-        }
+        this.getList();
+        this.toDoList.splice(taskNumber - 1, 1);
+        this.updateList();
+        console.log(`${task}. számú feladat törölve.`);
     }
 
     printTodoList() {
-        try {
-            if (!fs.existsSync(this.file)) throw Error(`Unable to read file: ${this.file}`);
-            this.getList();
-            if (this.toDoList[0] === '' || this.toDoList.length === 0) {
-                console.log('Nincs mára tennivalód! :)');
-            } else {
-                this.toDoList.forEach((task, index) => console.log(`${index + 1}. ${task}`));
-            }
-        } catch (err) {
-            console.log(err.message);
+        this.getList();
+        if (this.toDoList[0] === '' || this.toDoList.length === 0) {
+            console.log('Nincs mára tennivalód! :)');
+        } else {
+            this.toDoList.forEach((task, index) => console.log(`${index + 1} - ${task}`));
         }
     }
 
