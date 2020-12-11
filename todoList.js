@@ -42,21 +42,29 @@ class TodoList {
     }
 
     addTask(task) {
-        if (task === true || task === '') {
-            console.log('Nem lehetséges új feladat hozzáadása: nincs megadva feladat!');
-        } else {
+        try {
+            if (task === true || task === '') throw Error('Nem lehetséges új feladat hozzáadása: nincs megadva feladat!');
             this.getList();
             this.textList.push(task);
             this.updateList();
             console.log(`${task} feladat elmentve.`);
+        } catch (err) {
+            console.log(err.message);
         }
     }
 
     removeTask(taskNumber) {
-        this.getList();
-        this.textList.splice(taskNumber - 1, 1);
-        this.updateList();
-        console.log(`${task}. számú feladat törölve.`);
+        try {
+            this.getList();
+            if (taskNumber === true || taskNumber === '') throw Error('Nem lehetséges az eltávolítás: nem adott meg indexet!');
+            if (taskNumber > this.textList.length) throw Error('Nem lehetséges az eltávolítás: túlindexelési probléma adódott!');
+            if (typeof taskNumber != "number") throw Error('Nem lehetséges az eltávolítás: a megadott index nem szám!');
+            this.textList.splice(taskNumber - 1, 1);
+            this.updateList();
+            console.log(`${taskNumber}. számú feladat törölve.`);
+        } catch (err) {
+            console.log(err.message);
+        }
     }
 
     createTaskList() {
@@ -82,11 +90,19 @@ class TodoList {
     }
 
     getTaskCompleted(taskNumber) {
-        this.getList();
-        this.createTaskList();
-        this.taskList[taskNumber - 1].getCompleted();
-        this.textList[taskNumber - 1] = this.textList[taskNumber - 1] + ' x ';
-        this.updateList();
+        try {
+            this.getList();
+            if (taskNumber === true || taskNumber === '') throw Error('Nem lehetséges az eltávolítás: nem adott meg indexet!');
+            if (taskNumber > this.textList.length) throw Error('Nem lehetséges az eltávolítás: túlindexelési probléma adódott!');
+            if (typeof taskNumber != "number") throw Error('Nem lehetséges az eltávolítás: a megadott index nem szám!');
+            this.createTaskList();
+            this.taskList[taskNumber - 1].getCompleted();
+            this.textList[taskNumber - 1] = this.textList[taskNumber - 1] + ' x ';
+            this.updateList();
+        }
+        catch (err) {
+            console.log(err.message);
+        }
     }
 }
 
