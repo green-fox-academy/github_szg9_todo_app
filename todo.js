@@ -10,6 +10,9 @@ export class Todo {
         try {
             if (!fs.existsSync(this.file)) throw Error(`Unable to read file: ${this.file}`);
             this.toDoList = (fs.readFileSync(this.file).toString().split('\n'));
+            if (this.toDoList[0] === '') {
+                this.toDoList.splice(0, 1);
+            }
         } catch (err) {
             console.log(err.message);
         }
