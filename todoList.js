@@ -99,6 +99,7 @@ class TodoList {
             this.taskList[taskNumber - 1].getCompleted();
             this.textList[taskNumber - 1] = this.textList[taskNumber - 1] + ' x ';
             this.updateList();
+            this.printTodoList();
         }
         catch (err) {
             console.log(err.message);
